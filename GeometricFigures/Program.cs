@@ -59,6 +59,13 @@ namespace GeometricFigures
         }
 
         public abstract void Print();
+
+        public override string ToString()
+        {
+            Console.SetCursorPosition(this.coordinationX, this.coordinationY);
+            Console.ForegroundColor = (ConsoleColor)color;
+            return $"Фигура : {name}, Цвет: {color} ";
+        }
     }
 
     abstract class Quadrangle : Figures
@@ -71,7 +78,12 @@ namespace GeometricFigures
         }
 
         public int ASize { get { return SizeA; } set { SizeA = value; } }
-        public int BSize { get { return SizeB; } set { SizeB = value; } }  
+        public int BSize { get { return SizeB; } set { SizeB = value; } }
+
+        public override string ToString()
+        {
+            return base.ToString() + $"Сторона A: {this.ASize} Сторона B: {this.BSize}";
+        }
 
     }
 
@@ -80,10 +92,7 @@ namespace GeometricFigures
         public Rectangle(string name, Color color, int coordinationX, int coordinationY, int SizeA, int SizeB) : base(name, color, coordinationX, coordinationY, SizeA, SizeB) { }
 
         public override void Print()
-        {
-            Console.SetCursorPosition(this.coordinationX, this.coordinationY);
-            Console.ForegroundColor = (ConsoleColor)color;
-            Console.WriteLine($"Фигура: {name} Цвет: {color} Сторона A: {this.ASize} Сторона B: {this.BSize}");
+        {            
 
             for (int i = 1; i < this.ASize + 1; i++)
             {
@@ -97,20 +106,25 @@ namespace GeometricFigures
                 Console.Write("*");
             }
 
-            for (int i = 1; i < this.BSize + 1; i++)
+            for (int i = 1; i < this.BSize; i++)
             {
                 Console.SetCursorPosition(this.coordinationX + i, this.coordinationY + 1);
                 Console.Write("*");
             }
 
-            for (int i = 1; i < this.BSize + 1; i++)
+            for (int i = 1; i < this.BSize; i++)
             {
                 Console.SetCursorPosition(this.coordinationX + i, this.coordinationY + this.ASize);
                 Console.Write("*");
             }
 
             Figures.ResetConsole();
-        }        
+        }
+
+        public override string ToString()
+        {
+            return base.ToString();
+        }
     }
 
     sealed class Rhombus : Quadrangle
@@ -119,10 +133,14 @@ namespace GeometricFigures
 
         public override void Print()
         {
-            Console.SetCursorPosition(this.coordinationX, this.coordinationY);
-            Console.ForegroundColor = (ConsoleColor)color;
-            Console.WriteLine($"Фигура: {name} Цвет: {color} Сторона A: {this.ASize} Сторона B: {this.BSize}");
+            Console.SetCursorPosition(this.coordinationX + 1, this.coordinationY + 1);
+            Console.WriteLine("Рисую Ромб");
             Figures.ResetConsole();
+        }
+
+        public override string ToString()
+        {
+            return base.ToString();
         }
     }
 
@@ -141,10 +159,14 @@ namespace GeometricFigures
        
         public override void Print()
         {
-            Console.SetCursorPosition(this.coordinationX, this.coordinationY);
-            Console.ForegroundColor = (ConsoleColor)color;
-            Console.WriteLine($"Фигура: {name} Цвет: {color} Сторона A: {this.ASize} Сторона B: {this.BSize} Сторона C:{this.SizeC} Сторона D: {this.SizeD}");
+            Console.SetCursorPosition(this.coordinationX + 1, this.coordinationY + 1);
+            Console.WriteLine("Рисую Трапецию");
             Figures.ResetConsole();
+        }
+
+        public override string ToString()
+        {
+            return base.ToString() + $" Сторона C:{this.SizeC} Сторона D: {this.SizeD}";
         }
     }
 
@@ -163,10 +185,15 @@ namespace GeometricFigures
 
         public override void Print()
         {
-            Console.SetCursorPosition(this.coordinationX, this.coordinationY);
-            Console.ForegroundColor = (ConsoleColor)color;
-            Console.WriteLine($"Фигура: {name} Цвет: {color} Сторона A: {this.SizeA} Сторона B: {this.SizeB} Сторона C:{this.SizeC} Сторона D: {this.SizeD} Сторона E: {this.SizeE} Сторона F: {this.SizeF}");
+            Console.SetCursorPosition(this.coordinationX + 1, this.coordinationY + 1);
+            
+            Console.WriteLine("Рисую Многоугольник");
             Figures.ResetConsole();
+        }
+
+        public override string ToString()
+        {
+            return base.ToString() + $" Сторона A: {this.SizeA} Сторона B: {this.SizeB} Сторона C:{this.SizeC} Сторона D: {this.SizeD} Сторона E: {this.SizeE} Сторона F: {this.SizeF}";
         }
     }
 
@@ -219,6 +246,7 @@ namespace GeometricFigures
 
             foreach (var item in figures)
             {
+                Console.WriteLine(item);
                 item.Print();
             }
 
